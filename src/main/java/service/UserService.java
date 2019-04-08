@@ -3,6 +3,7 @@ package service;
 import dao.UserDao;
 import entity.User;
 import exception.ActivateException;
+import exception.LoginException;
 import exception.RegisterException;
 import utils.MailUtils;
 
@@ -41,6 +42,24 @@ public class UserService {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ActivateException();
+        }
+    }
+
+    public User login(String username, String password) throws LoginException {
+        try {
+            User user = userDao.findByUsernameAndPassword(username, password);
+            if (user != null) {
+                // 判断用户是否激活
+                if (user.getState() == 1)
+                    return user;
+                else
+                    throw new ActivateException("用户未激活");
+            } else {
+                throw new LoginException("用户名或密码错误");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoginException("用户名或密码错误");
         }
     }
 }

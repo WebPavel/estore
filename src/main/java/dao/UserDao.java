@@ -27,4 +27,10 @@ public class UserDao {
         Object[] params = {1, activationCode};
         queryRunner.update(sql, params);
     }
+
+    public User findByUsernameAndPassword(String username, String password) throws SQLException {
+        String sql = "select * from usr_user where username = ? and password = ?";
+        Object[] params = {username, MD5Utils.md5(password)};
+        return queryRunner.query(sql, new BeanHandler<User>(User.class), params);
+    }
 }
