@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -110,6 +111,15 @@
                     <li>
                         <a href="#"><span class="l"></span><span class="r"></span><span class="t">关于我们</span></a>
                     </li>
+                    <c:if test="${not empty user}">
+                        <li>当前用户：${user.username}</li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/user/logout">注销</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${empty user}" >
+                        <li>未登录</li>
+                    </c:if>
                 </ul>
             </div>
             <div class="art-content-layout">
@@ -263,16 +273,18 @@
                                     <div class="art-blockcontent-cc"></div>
                                     <div class="art-blockcontent-body">
                                         <!-- block-content -->
-                                        <div><center>${requestScope["login.message"]}<br></center></div>
                                         <div><form method="post" name="loginForm" onsubmit="return checkForm();" action="${pageContext.request.contextPath}/user/login">
                                             <table>
                                                 <tr>
+                                                    <td colspan="2">${requestScope["login.message"]}</td>
+                                                </tr>
+                                                <tr>
                                                     <td>用户名</td>
-                                                    <td><input type="text" name="username" /><span id="username_message">${map["login.username.error"]}</span></td>
+                                                    <td><input type="text" name="username" value="" /><span id="username_message">${map["login.username.error"]}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>密  码</td>
-                                                    <td><input type="password" name="password" /><span id="password_message">${map["login.password.error"]}</span></td>
+                                                    <td><input type="password" name="password" value="" /><span id="password_message">${map["login.password.error"]}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2"><input type="checkbox" name="remember" value="on" />记住用户
