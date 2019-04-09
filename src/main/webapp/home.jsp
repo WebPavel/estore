@@ -228,7 +228,7 @@
                                                 <a href="page.html?i1"><span class="l"></span><span class="r"></span><span class="t">主页</span></a>
                                             </li>
                                             <li>
-                                                <a href="page.html?i2"><span class="l"></span><span class="r"></span><span class="t">添加商品</span></a>
+                                                <a href="${pageContext.request.contextPath}/product/add_product.jsp"><span class="l"></span><span class="r"></span><span class="t">添加商品</span></a>
                                             </li>
                                             <li>
                                                 <a href="page.html?i4"><span class="l"></span><span class="r"></span><span class="t">查看商品</span></a>
